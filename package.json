@@ -1,0 +1,27 @@
+{
+  "name": "pl.wp.psuw.gdziewarun",
+  "displayName": "GdzieWarun",
+  "version": "1.0.0",
+  "description": "Przeglądarka tabeli z pokrywą śniegową ze strony hydro.imgw.pl.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Paweł Suwiński",
+  "license": "MIT",
+  "devDependencies": {
+    "cordova-android": "^9.1.0",
+    "cordova-plugin-whitelist": "^1.3.4"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  }
+}
