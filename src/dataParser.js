@@ -5,7 +5,7 @@
  * @licence MIT
  */
 
-async function dataParser(url, regs, savedDate = null) {
+export default async function(url, regs, savedDate = null) {
   const pdf = require('pdfjs-dist');
   pdf.GlobalWorkerOptions.workerSrc = 'js/pdf.worker.bundle.js';
   const doc = await pdf.getDocument(url + '?_=' + Date.now()).promise;

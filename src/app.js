@@ -34,7 +34,7 @@ const Favorites = {
 
 const Search = m.stream(null);
 
-/* global dataParser */
+const dataParser = require('./dataParser.js').default;
 const Data = {
   date: localStorage.getItem('date'),
   survey: JSON.parse(localStorage.getItem('survey')) ?? [],
@@ -62,12 +62,12 @@ const Data = {
           : res.date === curDate ? Data.msg(null)
             : Data.warrning('Dane przestarzałe, spróbuj później.');
         m.redraw();
-      }).catch(e => Data.error('Błąd pobierania danych!'));
+      }).catch(e => console.log(e) || Data.error('Błąd pobierania danych!'));
   }
 };
 
 document.addEventListener('deviceready', () => {
-  const notification = window.cordova?.plugins.notification.local;
+  const notification = window.cordova?.plugins?.notification.local;
   const schedule = trigger => notification.schedule(Object.assign(
     { id: 1, silent: true },
     trigger ? { trigger: trigger } : {}
@@ -88,7 +88,7 @@ document.addEventListener('deviceready', () => {
         .map(row => `${row[0]}: ${row[2]}/ ${row[3]} [cm] ${row[4]}`)
         .join('\n');
     }
-    text && (notification.schedule({ title: Data.date, text: text }) ||
+    text && (notification?.schedule({ title: Data.date, text: text }) ||
       console.debug('TEXT: ' + text));
     text ?? true
       ? schedule({
@@ -182,3 +182,5 @@ document.addEventListener('deviceready', () => {
     ]
   });
 });
+// temp workout for "deviceready has not fired after 5 seconds
+document.dispatchEvent(new Event('deviceready'));
