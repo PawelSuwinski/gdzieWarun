@@ -62,7 +62,8 @@ const Data = {
           : res.date === curDate ? Data.msg(null)
             : Data.warrning('Dane przestarzałe, spróbuj później.');
         m.redraw();
-      }).catch(e => console.log(e) || Data.error('Błąd pobierania danych!'));
+      }).catch(e => console.log(JSON.stringify(e)) ||
+       Data.error('Błąd pobierania danych!'));
   }
 };
 

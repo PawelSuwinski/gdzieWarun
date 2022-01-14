@@ -6,9 +6,6 @@ module.exports = {
     path: path.resolve(__dirname, 'www', 'js'),
     filename: 'app.js',
   },
-  externals: {
-    'pdfjs-dist': 'commonjs pdfjs-dist'
-  },
   module: {
     rules: [
       {

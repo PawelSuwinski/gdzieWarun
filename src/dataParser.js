@@ -7,7 +7,7 @@
 
 export default async function(url, regs, savedDate = null) {
   const pdf = require('pdfjs-dist');
-  pdf.GlobalWorkerOptions.workerSrc = 'js/pdf.worker.bundle.js';
+  pdf.GlobalWorkerOptions.workerSrc = 'js/pdf.worker.js';
   const doc = await pdf.getDocument(url + '?_=' + Date.now()).promise;
   const pdfDate = (await doc.getMetadata()).info.CreationDate.substring(2, 10);
   return savedDate && pdfDate <= savedDate ? {} : {
