@@ -173,7 +173,7 @@ document.addEventListener('deviceready', () => {
         m('input' + (Search() === null ? '.hidden' : ''), {
           name: 'search',
           placeholder: 'Szukaj',
-          valie: Search(),
+          value: Search(),
           size: 5,
           onblur: e => Search() || Search(null),
           oninput: e => Search(e.target.value.toLowerCase())
