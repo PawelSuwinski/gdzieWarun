@@ -35,7 +35,6 @@ const Favorites = {
 /* global Stream */
 const Search = new Stream(null);
 
-const dataParser = require('./dataParser.js').default;
 const Data = {
   date: localStorage.getItem('date'),
   survey: JSON.parse(localStorage.getItem('survey')) ?? [],
@@ -54,7 +53,8 @@ const Data = {
   error: msg => Data.msg(msg, false, 'error'),
   fetch: function() {
     Data.msg('', true);
-    return dataParser(Config.url, Object.values(Config.cols), Data.date)
+    return require('./dataParser.js')
+      .default(Config.url, Object.values(Config.cols), Data.date)
       .then(res => {
         Object.assign(Data, res);
         localStorage.setItem('date', Data.date);
