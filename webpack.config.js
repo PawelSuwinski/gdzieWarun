@@ -28,7 +28,7 @@ module.exports = (env, args) => ({
       Stream: 'mithril/stream',
     })
   ],
-  optimisation: {
+  optimization: {
     minimizer: [
       new TerserPlugin({
         extractComments: false,
