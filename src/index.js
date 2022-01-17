@@ -57,6 +57,7 @@ const Data = {
   }
 };
 
+/*
 document.addEventListener('deviceready', () => {
   const notification = window.cordova?.plugins?.notification.local;
   const schedule = trigger => notification.schedule(Object.assign(
@@ -90,88 +91,87 @@ document.addEventListener('deviceready', () => {
       })
       : schedule({ in: 30, unit: 'minute' });
   });
-
-  m.mount(document.getElementById('data'), {
-    oninit: vnode => curDate !== Data.date && Data.fetch(),
-    view: vnode => [m('p', Data.date), m('table.striped', {
-      onclick: e => e.target.parentNode.tagName === 'TD' &&
-        e.target.parentNode.classList.contains(names[0]) && (
-        Favorites.list.has(e.target.innerText)
-          ? Favorites.list.delete(e.target.innerText)
-          : Favorites.list.add(e.target.innerText)
-      ) && localStorage.setItem('favorite', Array.from(Favorites.list))
-    }, [
-      m('thead', m('tr', names.filter((col, idx) => idx % 2 === 0)
-        .map(col => m('th.' + col, col)))),
-      m('tbody', Data.filtered()
-        .map(e => m('tr', names.filter((col, idx) => idx % 2 === 0)
-          .map((col, idx) => m('td.' + col,
-            idx === 0
-              ? [0, 1].map(idx => m('div' +
-                (Favorites.list.has(e[idx]) ? '.favorite' : ''), e[idx]))
-              : idx === 1
-                ? [2, 3].map(idx => m('span', parseInt(e[idx])))
-                : Config.type[e[idx + 2]]
-          ))
-        ))
-      ),
-    ])]
-  });
-
-  m.mount(document.getElementById('filters'), {
-    view: vnode => [
-      m('div.responsive-margin', [
-        m('input', {
-          name: 'min',
-          type: 'range',
-          min: 1,
-          max: 50,
-          step: 1,
-          value: localStorage.getItem('min') ?? 1,
-          onchange: e => localStorage.setItem('min', e.target.value)
-        }),
-        m('p', `min: ${localStorage.getItem('min') ?? 1} cm`),
-      ]),
-      m('div.responsive-margin', [
-        m('span#favorite.tooltip' + (Favorites.on ? '.on' : ''), {
-          'aria-label': 'Ulubione',
-          onclick: e => {
-            e.target.classList.toggle('on');
-            (val => Object.assign(Favorites, { on: val }) &&
-              localStorage.setItem('on', val))(e.target.classList.contains('on'));
-          }
-        }),
-        m('span#search.tooltip.icon-search', {
-          'aria-label': 'Szukaj',
-          onclick: e => Search() || Search(Search() === null ? '' : null)
-        }),
-        m('span#reset.tooltip', {
-          'aria-label': 'Resetuj',
-          onclick: e => !confirm('Resetować ustawienia?') ||
-            ['min', 'favorite', 'on'].forEach(f =>
-              localStorage.removeItem(f)) ||
-              Search(null) ||
-              Object.assign(Favorites, { list: new Set([]), on: false })
-        }),
-        m('span#reload.tooltip', {
-          'aria-label': 'Odśwież',
-          onclick: e =>
-            ['survey', 'date'].forEach(f => localStorage.removeItem(f)) ||
-            location.reload()
-        }),
-      ]),
-      m('div.responsive-margin', [
-        m('input' + (Search() === null ? '.hidden' : ''), {
-          name: 'search',
-          placeholder: 'Szukaj',
-          value: Search(),
-          size: 5,
-          onblur: e => Search() || Search(null),
-          oninput: e => Search(e.target.value.toLowerCase())
-        }),
-      ])
-    ]
-  });
 });
-// temp workout for "deviceready has not fired after 5 seconds
-document.dispatchEvent(new Event('deviceready'));
+*/
+
+m.mount(document.getElementById('data'), {
+  oninit: vnode => curDate !== Data.date && Data.fetch(),
+  view: vnode => [m('p', Data.date), m('table.striped', {
+    onclick: e => e.target.parentNode.tagName === 'TD' &&
+      e.target.parentNode.classList.contains(names[0]) && (
+      Favorites.list.has(e.target.innerText)
+        ? Favorites.list.delete(e.target.innerText)
+        : Favorites.list.add(e.target.innerText)
+    ) && localStorage.setItem('favorite', Array.from(Favorites.list))
+  }, [
+    m('thead', m('tr', names.filter((col, idx) => idx % 2 === 0)
+      .map(col => m('th.' + col, col)))),
+    m('tbody', Data.filtered()
+      .map(e => m('tr', names.filter((col, idx) => idx % 2 === 0)
+        .map((col, idx) => m('td.' + col,
+          idx === 0
+            ? [0, 1].map(idx => m('div' +
+              (Favorites.list.has(e[idx]) ? '.favorite' : ''), e[idx]))
+            : idx === 1
+              ? [2, 3].map(idx => m('span', parseInt(e[idx])))
+              : Config.type[e[idx + 2]]
+        ))
+      ))
+    ),
+  ])]
+});
+
+m.mount(document.getElementById('filters'), {
+  view: vnode => [
+    m('div.responsive-margin', [
+      m('input', {
+        name: 'min',
+        type: 'range',
+        min: 1,
+        max: 50,
+        step: 1,
+        value: localStorage.getItem('min') ?? 1,
+        onchange: e => localStorage.setItem('min', e.target.value)
+      }),
+      m('p', `min: ${localStorage.getItem('min') ?? 1} cm`),
+    ]),
+    m('div.responsive-margin', [
+      m('span#favorite.tooltip' + (Favorites.on ? '.on' : ''), {
+        'aria-label': 'Ulubione',
+        onclick: e => {
+          e.target.classList.toggle('on');
+          (val => Object.assign(Favorites, { on: val }) &&
+            localStorage.setItem('on', val))(e.target.classList.contains('on'));
+        }
+      }),
+      m('span#search.tooltip.icon-search', {
+        'aria-label': 'Szukaj',
+        onclick: e => Search() || Search(Search() === null ? '' : null)
+      }),
+      m('span#reset.tooltip', {
+        'aria-label': 'Resetuj',
+        onclick: e => !confirm('Resetować ustawienia?') ||
+          ['min', 'favorite', 'on'].forEach(f =>
+            localStorage.removeItem(f)) ||
+            Search(null) ||
+            Object.assign(Favorites, { list: new Set([]), on: false })
+      }),
+      m('span#reload.tooltip', {
+        'aria-label': 'Odśwież',
+        onclick: e =>
+          ['survey', 'date'].forEach(f => localStorage.removeItem(f)) ||
+          location.reload()
+      }),
+    ]),
+    m('div.responsive-margin', [
+      m('input' + (Search() === null ? '.hidden' : ''), {
+        name: 'search',
+        placeholder: 'Szukaj',
+        value: Search(),
+        size: 5,
+        onblur: e => Search() || Search(null),
+        oninput: e => Search(e.target.value.toLowerCase())
+      }),
+    ])
+  ]
+});
