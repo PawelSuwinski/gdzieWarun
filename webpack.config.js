@@ -26,6 +26,9 @@ module.exports = (env, args) => ({
       m: 'mithril',
       Stream: 'mithril/stream',
       Config: ['./config', 'default'],
-    })
+    }),
+    new webpack.DefinePlugin(args.mode !== 'development' ? {} : {
+      'Config.url': '"http://localhost:8080/Pokrywa_sniezna.pdf"',
+    }),
   ],
 });
