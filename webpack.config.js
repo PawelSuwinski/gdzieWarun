@@ -25,6 +25,7 @@ module.exports = (env, args) => ({
     new webpack.ProvidePlugin({
       m: 'mithril',
       Stream: 'mithril/stream',
+      Config: ['./config', 'default'],
     })
   ],
 });
