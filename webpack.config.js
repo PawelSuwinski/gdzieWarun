@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env, args) => ({
   mode: 'production',
@@ -26,5 +27,12 @@ module.exports = (env, args) => ({
       m: 'mithril',
       Stream: 'mithril/stream',
     })
-  ]
+  ],
+  optimisation: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+      }),
+    ]
+  },
 });
