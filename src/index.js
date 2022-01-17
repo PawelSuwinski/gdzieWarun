@@ -124,18 +124,6 @@ m.mount(document.getElementById('data'), {
 m.mount(document.getElementById('filters'), {
   view: vnode => [
     m('div.responsive-margin', [
-      m('input', {
-        name: 'min',
-        type: 'range',
-        min: 1,
-        max: 50,
-        step: 1,
-        value: localStorage.getItem('min') ?? 1,
-        onchange: e => localStorage.setItem('min', e.target.value)
-      }),
-      m('p', `min: ${localStorage.getItem('min') ?? 1} cm`),
-    ]),
-    m('div.responsive-margin', [
       m('span#favorite.tooltip' + (Favorites.on ? '.on' : ''), {
         'aria-label': 'Ulubione',
         onclick: e => {
@@ -162,6 +150,18 @@ m.mount(document.getElementById('filters'), {
           ['survey', 'date'].forEach(f => localStorage.removeItem(f)) ||
           location.reload()
       }),
+    ]),
+    m('div.responsive-margin', [
+      m('input', {
+        name: 'min',
+        type: 'range',
+        min: 1,
+        max: 50,
+        step: 1,
+        value: localStorage.getItem('min') ?? 1,
+        onchange: e => localStorage.setItem('min', e.target.value)
+      }),
+      m('p', `min: ${localStorage.getItem('min') ?? 1} cm`),
     ]),
     m('div.responsive-margin', [
       m('input' + (Search() === null ? '.hidden' : ''), {

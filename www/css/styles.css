@@ -1,9 +1,9 @@
-#filters div:nth-child(1) {
-  padding-left: 30px;
+#filters div:nth-child(2) {
+  padding-left: 15px;
   float: left;
 }
-#filters div:not(:nth-child(1)) {
-  padding-right: 30px;
+#filters div:not(:nth-child(2)) {
+  padding-right: 15px;
   float: right;
 }
 
