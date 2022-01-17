@@ -1,12 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports = {
-  mode: 'development',
-  entry: './src/app.js',
+module.exports = (env, args) => ({
+  mode: 'production',
   output: {
-    path: path.resolve(__dirname, 'www', 'js'),
-    filename: 'app.js',
+    path: path.resolve(__dirname, 'www', 'js')
   },
   module: {
     rules: [
@@ -29,4 +27,4 @@ module.exports = {
       Stream: 'mithril/stream',
     })
   ]
-};
+});
