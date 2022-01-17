@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require('webpack');
+
 module.exports = {
   mode: 'development',
   entry: './src/app.js',
@@ -20,5 +22,11 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      m: 'mithril',
+      Stream: 'mithril/stream',
+    })
+  ]
 };

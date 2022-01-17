@@ -32,7 +32,8 @@ const Favorites = {
   search: null,
 };
 
-const Search = m.stream(null);
+/* global Stream */
+const Search = new Stream(null);
 
 const dataParser = require('./dataParser.js').default;
 const Data = {
