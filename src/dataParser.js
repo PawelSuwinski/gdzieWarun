@@ -6,7 +6,7 @@
  */
 
 export default async function(url, regs, savedDate = null) {
-  const pdf = require('pdfjs-dist');
+  const pdf = await import('pdfjs-dist');
   pdf.GlobalWorkerOptions.workerSrc = 'js/pdf.worker.js';
   const doc = await pdf.getDocument(url + '?_=' + Date.now()).promise;
   const pdfDate = (await doc.getMetadata()).info.CreationDate.substring(2, 10);

@@ -7,3 +7,5 @@ node_modules/
 /plugins/
 /platforms/
 www/js/main.js
+www/js/[0-9]*.js
+www/js/*LICENSE.txt
