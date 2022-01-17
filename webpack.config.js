@@ -3,6 +3,10 @@ const webpack = require('webpack');
 
 module.exports = (env, args) => ({
   mode: 'production',
+  entry: {
+    main: './src/index.js',
+    'pdf.worker': 'pdfjs-dist/build/pdf.worker',
+  },
   output: {
     path: path.resolve(__dirname, 'www', 'js')
   },
