@@ -24,6 +24,8 @@ const Favorites = {
 /* global Stream */
 const Search = new Stream(null);
 
+// const Messages = new Stream();
+
 const Data = {
   date: localStorage.getItem('date'),
   survey: JSON.parse(localStorage.getItem('survey')) ?? [],
@@ -56,6 +58,21 @@ const Data = {
        Data.error('Błąd pobierania danych!'));
   }
 };
+
+(resizer => {
+  window.addEventListener('resize', resizer);
+  new MutationObserver(resizer).observe(document.getElementById('header'),
+    { attributes: true, childList: true, subtree: true });
+})(() => {
+  const table = document.querySelector('table');
+  const footer = document.getElementById('footer');
+  const maxHeight = window.innerHeight - footer.offsetHeight -
+    table.offsetTop;
+  const highEnough = (table.tBodies[0].rows[0]?.offsetHeight ?? 0 +
+    table.tHead.offsetHeight) < maxHeight;
+  highEnough && Object.assign(table.style, { maxHeight: `${maxHeight}px` });
+  footer.style.position = highEnough ? 'absolute' : 'relative';
+});
 
 /*
 document.addEventListener('deviceready', () => {

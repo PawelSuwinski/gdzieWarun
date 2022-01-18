@@ -7,12 +7,16 @@
   float: right;
 }
 
+.tooltip::before, .tooltip::after {
+  left: 0% !important;
+}
+
 div#filters,
 div#data {
   clear: both;
   margin-top: 20px;
 }
-div#data p { font-weight: bold; padding-top: 20px; }
+div#data p { font-weight: bold; }
 #filters span {
   margin-left: 10px;
   width: 24px;
@@ -59,6 +63,13 @@ tbody td {
   padding-right: 10px;
 }
 
+#footer {
+  position: absolute;
+  bottom: 0;
+}
+
 .footnote { 
   font-style: italic;
+  margin-bottom: 0;
+  margin-top: 0;
 }
