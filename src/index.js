@@ -24,7 +24,7 @@ const Favorites = {
 /* global Stream */
 const Search = new Stream(null);
 
-// const Messages = new Stream();
+const Message = new Stream(null);
 
 const Data = {
   date: localStorage.getItem('date'),
@@ -35,27 +35,21 @@ const Data = {
       res || val.toLowerCase().indexOf(Search()) > -1, false))
     .filter(e => !Favorites.on || Favorites.list.has(e[0]) ||
     Favorites.list.has(e[1])),
-  msg: (msg, spinner = false, type = 'info') =>
-    m.render(document.getElementById('message'), [
-      msg ? m('span.' + type, msg) : null,
-      spinner ? m('div.spinner') : null
-    ]),
-  warrning: msg => Data.msg(msg, false, 'warrning'),
-  error: msg => Data.msg(msg, false, 'error'),
   fetch: function() {
-    Data.msg('', true);
+    Message('');
+    m.redraw();
     return require('./dataParser.js')
       .default(Config.url, Object.values(Config.cols), Data.date)
       .then(res => {
         Object.assign(Data, res);
         localStorage.setItem('date', Data.date);
         localStorage.setItem('survey', JSON.stringify(Data.survey));
-        res.survey?.length === 0 ? Data.warrning('Brak danych!')
-          : res.date === curDate ? Data.msg(null)
-            : Data.warrning('Dane przestarzałe, spróbuj później.');
+        res.survey?.length === 0 ? Message('Brak danych!')
+          : res.date === curDate ? Message(null)
+            : Message('Dane przestarzałe, spróbuj później.');
         m.redraw();
       }).catch(e => console.log(JSON.stringify(e)) ||
-       Data.error('Błąd pobierania danych!'));
+       Message('Błąd pobierania danych!'));
   }
 };
 
@@ -110,6 +104,11 @@ document.addEventListener('deviceready', () => {
   });
 });
 */
+
+m.mount(document.getElementById('message'), {
+  view: vnode => Message() === '' ? m('div.spinner') : Message()
+    ? m('span.warrning', Message()) : null
+});
 
 m.mount(document.getElementById('data'), {
   oninit: vnode => curDate !== Data.date && Data.fetch(),
