@@ -44,12 +44,15 @@ const Data = {
         Object.assign(Data, res);
         localStorage.setItem('date', Data.date);
         localStorage.setItem('survey', JSON.stringify(Data.survey));
-        res.survey?.length === 0 ? Message('Brak danych!')
-          : res.date === curDate ? Message(null)
-            : Message('Dane przestarzałe, spróbuj później.');
+        Message(res.survey?.length === 0 ? 'Brak danych!'
+          : res.date !== curDate ? 'Dane przestarzałe, spróbuj później.'
+            : null);
         m.redraw();
-      }).catch(e => console.log(JSON.stringify(e)) ||
-       Message('Błąd pobierania danych!'));
+      }).catch(e => {
+        console.log(JSON.stringify(e));
+        Message('Błąd pobierania danych!');
+        m.redraw();
+      });
   }
 };
 
