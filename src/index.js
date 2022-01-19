@@ -71,15 +71,19 @@ const Data = {
   footer.style.position = highEnough ? 'absolute' : 'relative';
 });
 
-/*
 document.addEventListener('deviceready', () => {
-  const notification = window.cordova?.plugins?.notification.local;
+  /*
+  window.cordova.plugins.backgroundMode.enable();
+  window.cordova.plugins.backgroundMode.setDefaults({ hidden: true });
+  window.cordova.plugins.backgroundMode.overrideBackButton();
+  */
+
+  const notification = window.cordova.plugins.notification.local;
   const schedule = trigger => notification.schedule(Object.assign(
     { id: 1, silent: true },
     trigger ? { trigger: trigger } : {}
   ), res => console.debug(`scheduled #1 ${JSON.stringify(trigger)}: ${res}`));
   notification?.clearAll(res => console.debug('cleared: ' + res));
-  notification?.isScheduled(1, res => res || schedule());
   notification?.on('trigger', async function(n) {
     if (!n.id) {
       return;
@@ -105,8 +109,8 @@ document.addEventListener('deviceready', () => {
       })
       : schedule({ in: 30, unit: 'minute' });
   });
+  notification?.isScheduled(1, res => res || schedule());
 });
-*/
 
 m.mount(document.getElementById('message'), {
   view: vnode => Message() === '' ? m('div.spinner') : Message()
