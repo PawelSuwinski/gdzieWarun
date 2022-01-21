@@ -90,14 +90,12 @@ document.addEventListener('deviceready', () => {
     }
     console.debug('triggered: ' + JSON.stringify(n));
     let text = null;
-    if (curDate !== Data.date) {
-      await Data.fetch();
-      text = Data.filtered().map(row => row
-        .map((col, idx) => [2, 3].includes(idx) ? parseInt(col)
-          : idx === 4 ? Config.type[col] : col))
-        .map(row => `${row[0]}: ${row[2]}/ ${row[3]} [cm] ${row[4]}`)
-        .join('\n');
-    }
+    Message() !== '' && curDate !== Data.date && await Data.fetch();
+    text = curDate !== Data.date ? '' : Data.filtered().map(row => row
+      .map((col, idx) => [2, 3].includes(idx) ? parseInt(col)
+        : idx === 4 ? Config.type[col] : col))
+      .map(row => `${row[0]}: ${row[2]}/ ${row[3]} [cm] ${row[4]}`)
+      .join('\n');
     text && (notification?.schedule({ title: Data.date, text: text }) ||
       console.debug('TEXT: ' + text));
     text ?? true
