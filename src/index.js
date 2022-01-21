@@ -99,7 +99,7 @@ document.addEventListener('deviceready', () => {
         .join('\n');
     }
     text && (notification?.schedule({ title: Data.date, text: text }) ||
-      console.debug('TEXT: ' + text));
+      console.debug('TEXT: ' + text.replaceAll('\n', ', ')));
     text ?? true
       ? schedule({
         at: (d => {
@@ -190,7 +190,6 @@ m.mount(document.getElementById('filters'), {
       m('input' + (Search() === null ? '.hidden' : ''), {
         name: 'search',
         placeholder: 'Szukaj',
-        value: Search(),
         size: 5,
         onblur: e => Search() || Search(null),
         oninput: e => Search(e.target.value.toLowerCase())
