@@ -19,11 +19,12 @@
     "@babel/preset-env": "^7.16.8",
     "babel-loader": "^8.2.3",
     "cordova-android": "^9.1.0",
+    "cordova-plugin-background-mode": "^0.7.3",
     "cordova-plugin-badge": "^0.8.8",
-    "cordova-plugin-device": "^2.0.3",
-    "cordova-plugin-whitelist": "^1.3.4",
     "cordova-plugin-console": "^1.1.0",
+    "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-local-notification": "^0.9.0-beta.2",
+    "cordova-plugin-whitelist": "^1.3.4",
     "core-js": "^3.20.2",
     "mithril": "^2.0.4",
     "pdfjs-dist": "^2.5.207",
@@ -38,12 +39,11 @@
       "cordova-plugin-console": {},
       "cordova-plugin-device": {},
       "cordova-plugin-badge": {},
-      "cordova-plugin-local-notification": {}
+      "cordova-plugin-local-notification": {},
+      "cordova-plugin-background-mode": {}
     },
     "platforms": [
       "android"
     ]
-  },
-  "dependencies": {
   }
 }
